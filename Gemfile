@@ -1,4 +1,4 @@
-source 'https://rubygems.org'
-
-# Specify your gem's dependencies in ruby-egg-notifier.gemspec
+source :rubygems
 gemspec
+gem 'rake'
+gem 'rspec'
