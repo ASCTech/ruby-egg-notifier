@@ -1,7 +1,7 @@
 require "egg-notifier/version"
+require "egg-notifier/configuration"
 
-module Egg
-  module Notifier
-    # Your code goes here...
+class Egg
+  class Notifier
   end
 end
