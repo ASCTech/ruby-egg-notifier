@@ -1,7 +1,4 @@
 require "egg-notifier/version"
 require "egg-notifier/configuration"
-
-class Egg
-  class Notifier
-  end
-end
+require "egg-notifier/egg"
+require "egg-notifier/egg/notifier"
