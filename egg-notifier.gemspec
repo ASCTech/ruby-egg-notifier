@@ -14,4 +14,6 @@ Gem::Specification.new do |gem|
   gem.name          = "egg-notifier"
   gem.require_paths = ["lib"]
   gem.version       = Egg::Notifier::VERSION
+
+  gem.add_runtime_dependency 'json'
 end
