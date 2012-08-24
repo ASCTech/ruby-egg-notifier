@@ -12,25 +12,26 @@ describe Egg::Notifier do
   end
 
   describe '#execute!' do
+    let(:api_key) { '1234567890abcdef' }
     subject { Egg::Notifier.new('the-event-name', '2012-08-23T14:25:00Z') }
 
-    it 'should raise an exception when the service is not defined' do
+    it 'should raise an exception when the API key is not defined' do
       Egg.url = 'http://egg.example.com/events'
-      lambda { subject.execute! }.should raise_error(Egg::ServiceNotDefined)
+      lambda { subject.execute! }.should raise_error(Egg::APIKeyNotDefined)
     end
 
     it 'should raise an exception when the url is not defined' do
-      Egg.service = 'TheService'
+      Egg.api_key = api_key
       lambda { subject.execute! }.should raise_error(Egg::UrlNotDefined)
     end
 
-    context 'with service and url defined' do
+    context 'with api_key and url defined' do
       let(:http)    { Egg::Notifier.send(:http) }
-      let(:json)    { '{"service":"TheService","name":"the-event-name","timestamp":"2012-08-23T14:25:00Z"}' }
-      let(:headers) { {'Content-type' => 'application/json'} }
+      let(:json)    { '{"name":"the-event-name","timestamp":"2012-08-23T14:25:00Z"}' }
+      let(:headers) { {'Content-type' => 'application/json', 'X-API-Key' => api_key} }
 
       before do
-        Egg.service = 'TheService'
+        Egg.api_key = api_key
         Egg.url = 'http://egg.example.com/events'
         http.should_receive(:post).with('/events', json, headers)
       end

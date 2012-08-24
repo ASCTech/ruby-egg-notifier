@@ -13,5 +13,5 @@ RSpec.configure do |config|
 
 #  FakeWeb.register_uri(:post, 'http://egg.example.com/events', :status => 201)
 
-  config.before(:each) { Egg.instance_variable_set('@url', nil); Egg.service = nil }
+  config.before(:each) { Egg.instance_variable_set('@url', nil); Egg.api_key = nil }
 end

@@ -14,9 +14,9 @@ describe Egg, 'configuration' do
     its('url.path')   { should eq('/events') }
   end
 
-  describe 'setting the Service' do
-    let(:service) { 'My Cool App' }
-    before { subject.service = service }
-    its(:service) { should eq(service) }
+  describe 'setting the API key' do
+    let(:api_key) { '1234567890abcdef' }
+    before { subject.api_key = api_key }
+    its(:api_key) { should eq(api_key) }
   end
 end

@@ -1,8 +1,8 @@
 class Egg
-  class ServiceNotDefined < RuntimeError; end
-  class UrlNotDefined     < RuntimeError; end
+  class APIKeyNotDefined < RuntimeError; end
+  class UrlNotDefined    < RuntimeError; end
 
   class Notifier
-    class HTTPFailure     < RuntimeError; end
+    class HTTPFailure    < RuntimeError; end
   end
 end

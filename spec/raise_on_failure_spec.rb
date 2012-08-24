@@ -7,7 +7,7 @@ describe Egg::Notifier, 'raise an exception on HTTP failure' do
 
   before do
     Egg.url = url
-    Egg.service = 'FailingService'
+    Egg.api_key = '1234567890abcdef'
     FakeWeb.register_uri(:post, url, :status => 406, :body => 'Rejected')
   end
 

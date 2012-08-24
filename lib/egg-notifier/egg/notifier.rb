@@ -11,13 +11,17 @@ class Egg
     end
 
     def execute!
-      raise ServiceNotDefined unless Egg.service
-      raise UrlNotDefined     unless Egg.url
+      raise APIKeyNotDefined unless Egg.api_key
+      raise UrlNotDefined    unless Egg.url
 
       response = self.class.http.post(url.path, params.to_json, headers)
 
       if Egg.raise_on_failure and !response.kind_of?(Net::HTTPSuccess)
-        raise HTTPFailure.new("#{response.code}: #{response.body}")
+        if response
+          raise HTTPFailure.new("#{response.code}: #{response.body}")
+        else
+          raise HTTPFailure.new("nil HTTP response, that's odd.")
+        end
       end
 
       response
@@ -39,11 +43,11 @@ class Egg
     end
 
     def params
-      {:service => Egg.service, :name => @event_name, :timestamp => @timestamp}
+      {:name => @event_name, :timestamp => @timestamp}
     end
 
     def headers
-      {'Content-type' => 'application/json'}
+      {'Content-type' => 'application/json', 'X-API-Key' => Egg.api_key}
     end
 
   end
