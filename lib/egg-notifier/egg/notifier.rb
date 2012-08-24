@@ -14,7 +14,13 @@ class Egg
       raise ServiceNotDefined unless Egg.service
       raise UrlNotDefined     unless Egg.url
 
-      self.class.http.post(url.path, params.to_json, headers)
+      response = self.class.http.post(url.path, params.to_json, headers)
+
+      if Egg.raise_on_failure and !response.kind_of?(Net::HTTPSuccess)
+        raise HTTPFailure.new("#{response.code}: #{response.body}")
+      end
+
+      response
     end
 
 

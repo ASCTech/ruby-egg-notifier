@@ -1,6 +1,6 @@
 class Egg
   class << self
-    attr_accessor :service
+    attr_accessor :service, :raise_on_failure
     attr_reader   :url
 
     def url=(url)
