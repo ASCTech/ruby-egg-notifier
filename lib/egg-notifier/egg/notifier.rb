@@ -31,7 +31,11 @@ class Egg
     private
 
     def self.http
-      @http ||= Net::HTTP.new(url.host, url.port)
+      return @http if @http
+
+      @http = Net::HTTP.new(url.host, url.port)
+      @http.use_ssl = true if url.scheme == 'https'
+      @http
     end
 
     def self.url
