@@ -1,6 +1,8 @@
 class Egg
   class Notifier
 
+    require 'net/https'
+
     attr_accessor :event_name, :timestamp
 
     def initialize(event_name, timestamp=Time.now)
